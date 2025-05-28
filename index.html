@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python Programs with Copy Feature</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
+
+
+    <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #333;">Question No 1</h2>
+        <p style="font-weight: bold;">Write a python program to implement BFS where the graph is implemented as an adjacency list</p>
+      
+        <p style="margin-bottom: 5px; font-weight: bold;">No additional libraries required.</p>
+      
+        <pre id="code1" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+      from collections import deque
+      
+      def bfs(graph, start):
+          visited = set()
+          queue = deque([start])
+      
+          while queue:
+              vertex = queue.popleft()
+              if vertex not in visited:
+                  print(vertex, end=" ")
+                  visited.add(vertex)
+      
+                  for neighbor in graph.get(vertex, []):
+                      if neighbor not in visited:
+                          queue.append(neighbor)
+      
+      graph = {
+          'A': ['B', 'C'],
+          'B': ['D', 'E'],
+          'C': ['F'],
+          'D': [],
+          'E': ['F'],
+          'F': []
+      }
+      
+      print("BFS traversal starting from node A:")
+      bfs(graph, 'A')
+        </pre>
+      
+        <button onclick="copyCode('code1')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+      </div>
+      
+      <script>
+        function copyCode(id) {
+          const code = document.getElementById(id).innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            alert("Copied to clipboard!");
+          }, () => {
+            alert("Failed to copy!");
+          });
+        }
+      </script>
+<div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 2</h2>
+    <p style="font-weight: bold;">Write a python program to implement informed search algorithms using A* algorithm</p>
+  
+    <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+    <pre id="install5" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;"> pip install heapq</pre>
+    <button onclick="copyCode('install5')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+  
+    <pre id="code5" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+  import heapq
+  
+  def a_star(graph, heuristics, start, goal):
+      open_list = []
+      heapq.heappush(open_list, (heuristics[start], 0, start, [start]))
+      closed_set = set()
+  
+      while open_list:
+          est_total_cost, cost_so_far, current_node, path = heapq.heappop(open_list)
+  
+          if current_node == goal:
+              print("Path:", " -> ".join(path))
+              print("Total cost:", cost_so_far)
+              return
+  
+          if current_node in closed_set:
+              continue
+          closed_set.add(current_node)
+  
+          for neighbor, weight in graph.get(current_node, []):
+              if neighbor not in closed_set:
+                  new_cost = cost_so_far + weight
+                  est_cost = new_cost + heuristics[neighbor]
+                  heapq.heappush(open_list, (est_cost, new_cost, neighbor, path + [neighbor]))
+  
+      print("No path found from", start, "to", goal)
+  
+  graph = {
+      'A': [('B', 1), ('C', 4)],
+      'B': [('D', 2), ('E', 5)],
+      'C': [('F', 3)],
+      'D': [],
+      'E': [('F', 1)],
+      'F': []
+  }
+  
+  heuristics = {
+      'A': 7,
+      'B': 6,
+      'C': 2,
+      'D': 1,
+      'E': 1,
+      'F': 0
+  }
+  
+  print("A* Search from A to F:")
+  a_star(graph, heuristics, 'A', 'F')
+    </pre>
+  
+    <button onclick="copyCode('code5')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+  
+  <script>
+    function copyCode(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Copied to clipboard!");
+      }, () => {
+        alert("Failed to copy!");
+      });
+    }
+  </script>
+        
+
+
+    <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #333;">Question No 3</h2>
+        <p style="font-weight: bold;">Write a python program to implement DFS where the graph is implemented as an adjacency list</p>
+
+        <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+        <pre id="install5" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;"> pip install scikit-learn numpy scipy</pre>
+        <button onclick="copyCode('install5')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+
+      
+        <pre id="code1" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+      def dfs(graph, start, visited=None):
+          if visited is None:
+              visited = set()
+          visited.add(start)
+          print(start, end=" ")
+          for neighbor in graph.get(start, []):
+              if neighbor not in visited:
+                  dfs(graph, neighbor, visited)
+      
+      graph = {
+          'A': ['B', 'C'],
+          'B': ['D', 'E'],
+          'C': ['F'],
+          'D': [],
+          'E': ['F'],
+          'F': []
+      }
+      
+      print("DFS traversal starting from node A:")
+      dfs(graph, 'A')
+        </pre>
+      
+        <button onclick="copyCode('code1')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+      </div>
+      
+      <script>
+        function copyCode(id) {
+          const code = document.getElementById(id).innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            alert("Copied to clipboard!");
+          }, () => {
+            alert("Failed to copy!");
+          });
+        }
+      </script>
+
+
+<div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 4</h2>
+    <p style="font-weight: bold;">Write a python program to implement informed search algorithms using memory-bounded A* algorithm</p>
+  
+       <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+        <pre id="install5" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;"> pip install heapq</pre>
+        <button onclick="copyCode('install5')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+    <pre id="code4" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+  import heapq
+  
+  class Node:
+      def __init__(self, state, parent, cost, heuristic):
+          self.state = state
+          self.parent = parent
+          self.g = cost
+          self.h = heuristic
+          self.f = self.g + self.h
+  
+      def __lt__(self, other):
+          return self.f &lt; other.f
+  
+  def reconstruct_path(node):
+      path = []
+      while node:
+          path.append(node.state)
+          node = node.parent
+      return path[::-1]
+  
+  def sma_star(graph, heuristics, start, goal, memory_limit):
+      open_list = []
+      visited = {}
+  
+      start_node = Node(start, None, 0, heuristics[start])
+      heapq.heappush(open_list, start_node)
+      visited[start] = start_node
+  
+      while open_list:
+          if len(open_list) &gt; memory_limit:
+              # Remove node with highest f(n) (least promising)
+              open_list.sort(reverse=True)
+              removed_node = open_list.pop()
+              visited.pop(removed_node.state, None)
+  
+          current = heapq.heappop(open_list)
+  
+          if current.state == goal:
+              path = reconstruct_path(current)
+              print("Path:", " -&gt; ".join(path))
+              print("Total cost:", current.g)
+              return
+  
+          for neighbor, cost in graph.get(current.state, []):
+              new_cost = current.g + cost
+              if neighbor not in visited or new_cost &lt; visited[neighbor].g:
+                  neighbor_node = Node(neighbor, current, new_cost, heuristics[neighbor])
+                  heapq.heappush(open_list, neighbor_node)
+                  visited[neighbor] = neighbor_node
+  
+      print("No path found (memory limit may be too low).")
+  
+  graph = {
+      'A': [('B', 1), ('C', 4)],
+      'B': [('D', 2), ('E', 5)],
+      'C': [('F', 3)],
+      'D': [],
+      'E': [('F', 1)],
+      'F': []
+  }
+  heuristics = {
+      'A': 7,
+      'B': 6,
+      'C': 2,
+      'D': 1,
+      'E': 1,
+      'F': 0
+  }
+  print("SMA* Search from A to F with memory limit 4:")
+  sma_star(graph, heuristics, 'A', 'F', memory_limit=4)
+    </pre>
+  
+    <button onclick="copyCode('code4')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+  
+  <script>
+    function copyCode(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Copied to clipboard!");
+      }, () => {
+        alert("Failed to copy!");
+      });
+    }
+  </script>
+  
+      
+
+  <!-- Question 5 -->
+  <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 5</h2>
+    <p style="font-weight: bold;">Write a python program to implement Gaussian naïve bayes model provide answer for this code</p>
+
+    <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+    <pre id="install5" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;">pip install scikit-learn numpy scipy</pre>
+    <button onclick="copyCode('install5')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+
+    <pre id="code5" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split into training and testing datasets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create a Gaussian Naive Bayes model
+model = GaussianNB()
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Predict using the model
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    </pre>
+
+    <button onclick="copyCode('code5')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+
+  <!-- Question 6 -->
+  <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 6</h2>
+    <p style="font-weight: bold;">Write a python program to implement Bernoulli naïve bayes models</p>
+
+    <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+    <pre id="install6" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;">pip install scikit-learn numpy scipy</pre>
+    <button onclick="copyCode('install6')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+
+    <pre id="code6" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+from sklearn.datasets import fetch_20newsgroups
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load a subset of the 20 newsgroups dataset
+categories = ['rec.sport.baseball', 'sci.space']
+newsgroups = fetch_20newsgroups(subset='all', categories=categories)
+
+# Convert text data to binary features
+vectorizer = CountVectorizer(binary=True)
+X = vectorizer.fit_transform(newsgroups.data)
+y = newsgroups.target
+
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create and train the Bernoulli Naive Bayes model
+model = BernoulliNB()
+model.fit(X_train, y_train)
+
+# Predict on test data
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    </pre>
+
+    <button onclick="copyCode('code6')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+
+  <!-- Question 7 -->
+  <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 7</h2>
+    <p style="font-weight: bold;">Write a python program to implement Multinomial naïve bayes models</p>
+
+    <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+    <pre id="install7" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;">pip install scikit-learn numpy scipy</pre>
+    <button onclick="copyCode('install7')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+
+    <pre id="code7" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+from sklearn.datasets import fetch_20newsgroups 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load dataset (select 2 categories for simplicity)
+categories = ['alt.atheism', 'soc.religion.christian']
+data = fetch_20newsgroups(subset='all', categories=categories, shuffle=True, random_state=42)
+
+# Convert text data to count vectors (word frequencies)
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(data.data)
+y = data.target
+
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create and train the Multinomial Naive Bayes model
+model = MultinomialNB()
+model.fit(X_train, y_train)
+
+# Predict on the test set
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    </pre>
+
+    <button onclick="copyCode('code7')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+
+  <!-- Question 8 -->
+  <div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 8</h2>
+    <p style="font-weight: bold;">Write a python program for k-nearest neighbours</p>
+
+    <p style="margin-bottom: 5px; font-weight: bold;">Install Required Libraries:</p>
+    <pre id="install8" style="background-color: #e8f4fc; padding: 10px; border-radius: 5px; border: 1px solid #b6d4fe; overflow-x: auto;">pip install scikit-learn numpy scipy</pre>
+    <button onclick="copyCode('install8')" style="margin-bottom: 20px; padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Install Command</button>
+
+    <pre id="code8" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split the dataset into training and testing sets (70% train, 30% test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create the KNN classifier with k=3 neighbors
+knn = KNeighborsClassifier(n_neighbors=3)
+
+# Train the model
+knn.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = knn.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    </pre>
+
+    <button onclick="copyCode('code8')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+
+<script>
+  function copyCode(id) {
+    const code = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      alert("Copied to clipboard!");
+    }, () => {
+      alert("Failed to copy!");
+    });
+  }
+</script>
+<div style="background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #333;">Question No 11</h2>
+    <p style="font-weight: bold;">Write a python program to implement DFS where the graph is implemented as an adjacency list</p>
+  
+    <p style="margin-bottom: 5px; font-weight: bold;">No additional libraries required.</p>
+  
+    <pre id="code6" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; border: 1px solid #ccc; overflow-x: auto;">
+  def dfs(graph, start, visited=None):
+      if visited is None:
+          visited = set()
+  
+      if start not in visited:
+          print(start, end=" ")
+          visited.add(start)
+          for neighbor in graph.get(start, []):
+              dfs(graph, neighbor, visited)
+  
+  graph = {
+      'A': ['B', 'C'],
+      'B': ['D', 'E'],
+      'C': ['F'],
+      'D': [],
+      'E': ['F'],
+      'F': []
+  }
+  
+  print("DFS traversal starting from node A:")
+  dfs(graph, 'A')
+    </pre>
+  
+    <button onclick="copyCode('code6')" style="margin-top: 10px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy Answer</button>
+  </div>
+  
+  <script>
+    function copyCode(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Copied to clipboard!");
+      }, () => {
+        alert("Failed to copy!");
+      });
+    }
+  </script>
+  
+
+</body>
+</html>
